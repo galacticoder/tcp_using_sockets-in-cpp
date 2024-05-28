@@ -1,3 +1,4 @@
+//https://github.com/galacticoder
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -22,13 +23,8 @@
 #include <arpa/inet.h>
 #include <boost/asio.hpp>
 #include <cstdlib>
-#include <X11/Xlib.h>
-#include <X11/keysym.h>
-#include <X11/extensions/XTest.h>
 
-//g++ -o client client.cpp encrypt_traffic.cpp -lcryptopp -lfmt
-//g++ -o client client.cpp encrypt_traffic.cpp -lcryptopp -lfmt -lX11 -lXtst
-
+//To run: g++ -o client client.cpp encrypt_traffic.cpp -lcryptopp -lfmt
 
 #define GREEN_TEXT "\033[32m"
 #define RESET_TEXT "\033[0m"
@@ -71,7 +67,7 @@ void receiveMessages(int clientSocket) {
 }
 
 int main() {
-    string local="127.0.0.1";
+    string local="127.0.0.1"; //if server is being served locally do not modify
     ifstream file("PORT.txt");
     string PORTSTR;
     getline(file, PORTSTR);
@@ -92,20 +88,18 @@ int main() {
         return 1;
     }
 
-    cout << "Found connection to server on port " << PORT << "\n";
+    cout << fmt::format("Found connection to server on port {}",PORT) << endl;
     cout << "Enter a username to go by: ";
     getline(cin, user);
 
     if (user.empty()) {
         cout << "Username cannot be empty. Disconnecting from server\n";
         close(clientSocket);
-        return 1;
+        exit(true);
     }
 
     send(clientSocket, user.c_str(), user.length(), 0);
     cout << GREEN_TEXT << fmt::format("You have joined the chat as '{}'\n", user) << RESET_TEXT << endl;
-    //recv enter here
-    // receiveMessages(clientSocket);
 
     SecByteBlock key(AES::DEFAULT_KEYLENGTH);
     SecByteBlock iv(AES::BLOCKSIZE);
@@ -118,14 +112,9 @@ int main() {
 
     thread receiver(receiveMessages, clientSocket);
     receiver.detach();
-
-    // string socketStr = sockaddrToString(serverAddress).c_str();
-    // socketStr.append((fmt::format(":{}",PORT))); port is already appended
-    // cout << socketStr << endl;
-
+    
     string message;
     while (true) {
-        // cout << GREEN_TEXT << fmt::format("\n{}: ",user) << RESET_TEXT;
         getline(cin, message);
         if (message == "quit") {
             break;
@@ -139,10 +128,10 @@ int main() {
         oss << encryptedMessage.length() << '|' << keyHex.length() << '|' << ivHex.length() << '|'
             << encryptedMessage << keyHex << ivHex;
         std::string formattedMessage = oss.str();
-        //need to send key, iv, and message all at once because of data loss
-
+        
+        //need to send key, iv, and message with a pipe delimeter all at once because of data loss
         bool serverReachable = isPortOpen(local,PORT);
-        if(serverReachable!=true){
+        if(serverReachable!=true){ //check if server is reachable before attempting to send a message
             cout << "Server has been shutdown" << endl;
             close(clientSocket);
             exit(true);
