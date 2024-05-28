@@ -1,3 +1,4 @@
+//https://github.com/galacticoder
 #include <iostream>
 #include <vector>
 #include <thread>
@@ -17,27 +18,23 @@
 #include <sstream>
 #include <boost/asio.hpp>
 
-//g++ -o server server.cpp -lcryptopp -lfmt
+//To run: g++ -o server server.cpp -lcryptopp -lfmt
 
 using boost::asio::ip::tcp;
 
 std::vector<int> connectedClients;
 std::mutex clientsMutex;
 
-const int TIMEOUT = 30;
-
 using namespace std;
 using namespace CryptoPP;
 
-// const char *enter = "";
-
 bool isPav(int port) {
-    int sockfd;
+    int pavtempsock;
     struct sockaddr_in addr;
     bool available = false;
 
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd < 0) {
+    pavtempsock = socket(AF_INET, SOCK_STREAM, 0);
+    if (pavtempsock < 0) {
         std::cerr << "Cannot create socket to test port availability" << std::endl;
         return false;
     }
@@ -46,13 +43,13 @@ bool isPav(int port) {
     addr.sin_addr.s_addr = INADDR_ANY;
     addr.sin_port = htons(port);
 
-    if (bind(sockfd, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
+    if (bind(pavtempsock, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
         available;
     } else {
         available = true;
     }
 
-    close(sockfd);
+    close(pavtempsock);
     return available;
 }
 
@@ -87,13 +84,13 @@ void handleClient(int clientSocket) {
             std::lock_guard<std::mutex> lock(clientsMutex);
             connectedClients.push_back(clientSocket);
         }
-        std::string joinMsg = fmt::format("'{}' has joined the chat", userStr);//if empty before then dont meantiuon it
+        std::string joinMsg = fmt::format("'{}' has joined the chat", userStr);
         std::cout << joinMsg << endl;
         {
             std::lock_guard<std::mutex> lock(clientsMutex);
             for (int client : connectedClients) {
                 if (client != clientSocket) {
-                    send(client, joinMsg.c_str(), joinMsg.length(), 0);
+                    broadcastMessage(joinMsg, client);
                 }
             }
         }
@@ -109,11 +106,7 @@ void handleClient(int clientSocket) {
                     std::lock_guard<std::mutex> lock(clientsMutex);
                     auto it = std::remove(connectedClients.begin(), connectedClients.end(), clientSocket);
                     connectedClients.erase(it, connectedClients.end());
-                    // connectedClients.shrink_to_fit();
-                    // if(connectedClients.size() == 0){
-                    //     cout << "Server is empty. Shutting down" << endl;
-                    //     close(serverSocket);
-                    // }
+                    connectedClients.shrink_to_fit();
                 }
 
                 std::string exitMsg = fmt::format("'{}' has left the chat", userStr);
@@ -121,7 +114,7 @@ void handleClient(int clientSocket) {
                 {
                     std::lock_guard<std::mutex> lock(clientsMutex);
                     for (int client : connectedClients) {
-                        send(client, exitMsg.c_str(), exitMsg.length(), 0);
+                        broadcastMessage(exitMsg, client);
                     }
                 }
             } else {
@@ -164,26 +157,19 @@ void handleClient(int clientSocket) {
                                 std::lock_guard<std::mutex> lock(clientsMutex);
                                 for (int client : connectedClients) {
                                     if (client != clientSocket) {
-                                        send(client, message.c_str(), message.length(), 0);
+                                        broadcastMessage(message, client);
                                     }
                                 }
                             }
-                            // for (int client : connectedClients) {
-                            //     if (client != clientSocket) {
-                            //         broadcastMessage(enter);
-                            //         broadcastMessage(enter);
-                            //     }
-                            // }
                         } else {
                             string errorMSG = "Couldnt send message";
                             std::cerr << errorMSG << std::endl;
-                            // send(clientSocket,errorMSG.c_str(),sizeof(errorMSG),0);
                         }
                     } catch (const std::exception& e) {
                         std::cerr << "Exception: " << e.what() << std::endl;
                     }
                 } else {
-                    std::cerr << "Error: Malformed packet received." << std::endl;
+                    std::cerr << "Error: Malformed packet received." << std::endl; //message wont be sent if error occurs here
                 }
             }
         }
@@ -208,7 +194,7 @@ int main() {
             }
         }
     });
-    t1.join();
+    t1.join(); //find port for server to use before running rest of the code
 
     int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -246,7 +232,6 @@ int main() {
 
         std::thread(handleClient, clientSocket).detach();
     }
-    // const string serverEnd = "Server has been shutdown";
     
     close(serverSocket);
     return 0;
