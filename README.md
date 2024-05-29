@@ -23,8 +23,19 @@ This project is an encrypted chat server and client application implemented in C
    ```bash
    sudo apt-get update
    sudo apt-get install libboost-all-dev libcrypto++-dev libfmt-dev g++
+   ```
+   ### **Redhat based distros:**
+   ```bash
+   sudo yum check-update
+   sudo yum install boost-devel crypto++-devel fmt-devel gcc-c++
+   ```
+      ### **On CentOS/RHEL 8 and Fedora:
+      ```bash
+      sudo dnf check-update
+      sudo dnf install boost-devel crypto++-devel fmt-devel gcc-c++
+      ```
 
-2. **Clone this repo:**
+3. **Clone this repo:**
    ```bash
    git clone https://github.com/galacticoder/encrypted-chat-server.git
    cd encrypted-chat-server
