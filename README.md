@@ -72,7 +72,7 @@ This will connect to the port where server is running automatically.
     - Sending encrypted messages to the server for secure messaging and removes the possibility of someone reading your plaintext message through package interception.
     - Uses AES-256 CBC encryption and pads message before encrypting to ensure the message recieved is the correct length to encrypt messages without errors.
  
-If theres an issue with the code or non-compatablility issues on LINUX you can report to this repository's [issues page](https://github.com/galacticoder/tcp_using_sockets-in-cpp/issues) and I or someone else will help.
+If theres an issue with the code or non-compatablility issues on LINUX you can report to this repository's [issues page](https://github.com/galacticoder/tcp_using_sockets-in-cpp/issues) and i or someone else will help.
 
 ## **License**
 
