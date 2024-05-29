@@ -67,9 +67,8 @@ This will connect to the port where server is running automatically.
     - Decrypting encrypted messages sent to server from client using AES encryption.
     -Broadcasting messages to all connected clients except the sender.
 
-* `client.cpp`: The server.cpp file implements the main functionality of the server. It handles client connections, manages encrypted communication, and broadcasts messages to all connected clients. Key functionalities include:
-    - Checking port availability automatically and selects an available port.
-    - Accepting client connections and creating a new thread for each client.
-    - Decrypting encrypted messages sent to server from client using AES encryption.
-    -Broadcasting messages to all connected clients except the sender.
+* `client.cpp`: The client.cpp file implements the client-side functionality. It connects to the server, sends encrypted messages, and receives messages from the server. Key functionalities include:
+    - Connecting to the server using the provided IP address and port.(Automatically connects to the port server is running on no need for config)
+    - Sending encrypted messages to the server for secure messaging and removes the possibility of someone reading your plaintext message through package interception .
+    - Handling user input and server responses.
 
