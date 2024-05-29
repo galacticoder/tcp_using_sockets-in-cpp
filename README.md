@@ -52,7 +52,11 @@ This project is an encrypted chat server and client application implemented in C
    ```
    ./server
    ```
+The server will start and listen for incoming connections. It will search for an available port to use if the default port (8080) is not available. The chosen port will be saved to PORT.txt
+
 ### **Running client:**
    ```
    ./client
    ```
+
+
