@@ -41,3 +41,4 @@ This project is an encrypted chat server and client application implemented in C
    ```
 
 ## Usage:
+Thus
