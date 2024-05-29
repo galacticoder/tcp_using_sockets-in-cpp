@@ -29,7 +29,7 @@ This project is an encrypted chat server and client application implemented in C
    sudo yum check-update
    sudo yum install boost-devel crypto++-devel fmt-devel gcc-c++
    ```
-      ### **On CentOS/RHEL 8 and Fedora:
+      ### **On CentOS/RHEL 8 and Fedora:**
       ```bash
       sudo dnf check-update
       sudo dnf install boost-devel crypto++-devel fmt-devel gcc-c++
