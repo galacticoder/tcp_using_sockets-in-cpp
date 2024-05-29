@@ -69,6 +69,6 @@ This will connect to the port where server is running automatically.
 
 * `client.cpp`: The client.cpp file implements the client-side functionality. It connects to the server, sends encrypted messages, and receives messages from the server. Key functionalities include:
     - Connecting to the server using the provided IP address and port.(Automatically connects to the port server is running on no need for config)
-    - Sending encrypted messages to the server for secure messaging and removes the possibility of someone reading your plaintext message through package interception .
-    - Handling user input and server responses.
+    - Sending encrypted messages to the server for secure messaging and removes the possibility of someone reading your plaintext message through package interception.
+    - Uses AES-256 CBC encryption to encrypt messages.
 
