@@ -70,7 +70,6 @@ This will connect to the port where server is running automatically.
 * `client.cpp`: The client.cpp file implements the client-side functionality. It connects to the server, sends encrypted messages, and receives messages from the server. Key functionalities include:
     - Connecting to the server using the provided IP address and port.(Automatically connects to the port server is running on no need for config)
     - Sending encrypted messages to the server for secure messaging and removes the possibility of someone reading your plaintext message through package interception.
-    - Uses AES-256 CBC encryption to encrypt messages.
+    - Uses AES-256 CBC encryption and pads message before encrypting to ensure the message recieved is the correct length to encrypt messages without errors.
  
 If theres an issue with the code or non-compatablility issues on LINUX you can report to this repository's [issues page](https://github.com/galacticoder/tcp_using_sockets-in-cpp/issues) and I or someone else will help.
-
