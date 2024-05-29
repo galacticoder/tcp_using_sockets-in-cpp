@@ -6,7 +6,8 @@ This project is an encrypted chat server and client application implemented in C
 
 - `server.cpp`: Implements the server that handles multiple clients and manages encrypted communication.
 - `client.cpp`: Implements the client that connects to the server and communicates using encrypted messages.
-- `encrypt_traffic.cpp`: Contains utility functions for encrypting and decrypting traffic.<small>This is smaller text.</small>
+- `encrypt_traffic.cpp`: Contains utility functions for encrypting and decrypting traffic.
+- <small>This is smaller text.</small>
 - `encry_to_server.h`: Header file for encryption utilities.
 
 ## Requirements
