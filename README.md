@@ -39,6 +39,9 @@ This project is an encrypted chat server and client application implemented in C
    ```bash
    git clone https://github.com/galacticoder/encrypted-chat-server.git
    ```
+4. **Build the project:**
+   ```bash
+   cd 
 
 ## Usage:
 Thus
