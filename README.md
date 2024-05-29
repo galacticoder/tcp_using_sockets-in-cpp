@@ -45,6 +45,7 @@ This project is an encrypted chat server and client application implemented in C
    g++ -o server server.cpp -lcryptopp -lfmt
    g++ -o client client.cpp encrypt_traffic.cpp -lcryptopp -lfmt
    ```
+   This compiles the server and client script so you can use it.
    
 ## Usage:
 Thus
