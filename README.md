@@ -60,7 +60,7 @@ The server will start and listen for incoming connections. It will search for an
    ```
 This will connect to the port where server is running automatically.
 
-## File Descriptions
+## Server and client file descriptions
 * `server.cpp`: The server.cpp file implements the main functionality of the server. It handles client connections, manages encrypted communication, and broadcasts messages to all connected clients. Key functionalities include:
     - Checking port availability automatically and selects an available port.
     - Accepting client connections and creating a new thread for each client.
