@@ -48,4 +48,6 @@ This project is an encrypted chat server and client application implemented in C
    This compiles the server and client script so you can use it.
    
 ## Usage:
-Thus
+### **Running the server:**
+   ```
+   ./server
