@@ -43,6 +43,7 @@ This project is an encrypted chat server and client application implemented in C
    ```bash
    cd tcp_using_sockets-in-cpp
    g++ -o server server.cpp -lcryptopp -lfmt
+   g++ -o client client.cpp encrypt_traffic.cpp -lcryptopp -lfmt
    ```
    
 ## Usage:
