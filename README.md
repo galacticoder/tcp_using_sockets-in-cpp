@@ -23,3 +23,6 @@ This project is an encrypted chat server and client application implemented in C
    ```bash
    sudo apt-get update
    sudo apt-get install libboost-all-dev libcrypto++-dev libfmt-dev g++
+   git clone https://github.com/galacticoder/encrypted-chat-server.git
+   cd encrypted-chat-server
+
