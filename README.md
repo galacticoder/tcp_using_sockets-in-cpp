@@ -37,11 +37,13 @@ This project is an encrypted chat server and client application implemented in C
 
 3. **Clone this repo:**
    ```bash
-   git clone https://github.com/galacticoder/encrypted-chat-server.git
+   git clone https://github.com/galacticoder/tcp_using_sockets-in-cpp.git
    ```
 4. **Build the project:**
    ```bash
-   cd 
-
+   cd tcp_using_sockets-in-cpp
+   g++ -o server server.cpp -lcryptopp -lfmt
+   ```
+   
 ## Usage:
 Thus
