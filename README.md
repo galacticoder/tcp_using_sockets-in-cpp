@@ -73,3 +73,7 @@ This will connect to the port where server is running automatically.
     - Uses AES-256 CBC encryption and pads message before encrypting to ensure the message recieved is the correct length to encrypt messages without errors.
  
 If theres an issue with the code or non-compatablility issues on LINUX you can report to this repository's [issues page](https://github.com/galacticoder/tcp_using_sockets-in-cpp/issues) and I or someone else will help.
+
+## **License**
+
+This project is licensed under the MIT License. You are free to use, modify, and distribute this software, but you must include the original license and copyright notice in any significant portions of the software. For more information, refer to the full [MIT License](https://opensource.org/licenses/MIT).
