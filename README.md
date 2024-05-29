@@ -19,7 +19,7 @@ This project is an encrypted chat server and client application implemented in C
 ### Installation on linux
 
 1. **Install required packages:**
-
+   ### **Debian based distros:**
    ```bash
    sudo apt-get update
    sudo apt-get install libboost-all-dev libcrypto++-dev libfmt-dev g++
