@@ -38,5 +38,6 @@ This project is an encrypted chat server and client application implemented in C
 3. **Clone this repo:**
    ```bash
    git clone https://github.com/galacticoder/encrypted-chat-server.git
-   cd encrypted-chat-server
+   ```
 
+## Usage:
