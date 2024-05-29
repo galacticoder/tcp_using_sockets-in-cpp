@@ -72,5 +72,5 @@ This will connect to the port where server is running automatically.
     - Sending encrypted messages to the server for secure messaging and removes the possibility of someone reading your plaintext message through package interception.
     - Uses AES-256 CBC encryption to encrypt messages.
  
-If theres an issue with the code or non-compatablility issues on LINUX you can report to this repository's []issues page and I or someone else will help.
+If theres an issue with the code or non-compatablility issues on LINUX you can report to this repository's [issues page]() and I or someone else will help.
 
