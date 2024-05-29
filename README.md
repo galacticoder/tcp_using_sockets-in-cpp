@@ -51,3 +51,8 @@ This project is an encrypted chat server and client application implemented in C
 ### **Running the server:**
    ```
    ./server
+   ```
+### **Running client:**
+   ```
+   ./client
+   ```
