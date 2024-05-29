@@ -1,4 +1,6 @@
 # Encrypted Chat Server
+##This script only runs on linux and is only meant for linux.
+
 
 This project is an encrypted chat server and client application implemented in C++. The communication between the server and the clients is encrypted using AES (Advanced Encryption Standard). The project consists of the following main files:
 
@@ -14,9 +16,7 @@ This project is an encrypted chat server and client application implemented in C
 - Crypto++ library
 - fmt library
 
-## Installation
-
-### Linux
+### Installation on linux
 
 1. **Install dependencies:**
 
