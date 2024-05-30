@@ -38,7 +38,7 @@ bool isPortAvailable(const char* ip, int port) {
 }
 
 int main(int argc, char *argv[]) {
-    const char *ip = "24.236.68.122";
+    const char *ip = "";
     if (argc != 2) {
         std::cerr << "Usage: " << argv[0] << " <port>" << std::endl;
         return 1;
