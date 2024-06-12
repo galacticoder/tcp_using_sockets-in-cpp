@@ -11,7 +11,6 @@
 using namespace std;
 using namespace CryptoPP;
 
-// Function to print byte array as hex
 void printHex(const std::string& label, const SecByteBlock& data) {
     std::string encoded;
     HexEncoder encoder(new StringSink(encoded));
