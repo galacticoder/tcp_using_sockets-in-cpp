@@ -11,7 +11,6 @@
 using namespace std;
 using namespace CryptoPP;
 
-// Function to print byte array as hex
 void printHex(const std::string& label, const SecByteBlock& data) {
     std::string encoded;
     HexEncoder encoder(new StringSink(encoded));
@@ -48,7 +47,6 @@ std::string aes_decrypt(const std::string& ciphertext, const SecByteBlock& key, 
     return plaintext;
 }
 
-// Function to encrypt the AES key and IV with a pre-shared secret
 std::string encryptWithPreSharedKey(const SecByteBlock& key, const SecByteBlock& iv, const SecByteBlock& preSharedKey, const SecByteBlock& preSharedIV) {
     std::string ciphertext;
     try {
@@ -70,7 +68,6 @@ std::string encryptWithPreSharedKey(const SecByteBlock& key, const SecByteBlock&
     return ciphertext;
 }
 
-// Function to decrypt the AES key and IV with a pre-shared secret
 void decryptWithPreSharedKey(const std::string& encryptedData, SecByteBlock& key, SecByteBlock& iv, const SecByteBlock& preSharedKey, const SecByteBlock& preSharedIV) {
     try {
         CBC_Mode<AES>::Decryption decryption(preSharedKey, preSharedKey.size(), preSharedIV);
@@ -82,11 +79,9 @@ void decryptWithPreSharedKey(const std::string& encryptedData, SecByteBlock& key
             )
         );
 
-        // Extract the decrypted key and IV from the plaintext
         std::string decryptedKey = plaintext.substr(0, key.size());
         std::string decryptedIV = plaintext.substr(key.size());
 
-        // Copy the decrypted key and IV to the output parameters
         memcpy(key.BytePtr(), decryptedKey.data(), key.size());
         memcpy(iv.BytePtr(), decryptedIV.data(), iv.size());
     } catch (const Exception& e) {
@@ -96,46 +91,34 @@ void decryptWithPreSharedKey(const std::string& encryptedData, SecByteBlock& key
 }
 
 int main() {
-    // Define AES key and IV lengths
     const int AES_KEY_LENGTH = 32; // 256-bit key
     const int AES_IV_LENGTH = 16;  // 128-bit IV
-
-    // Generate AES key and IV
+    
     SecByteBlock aesKey(AES_KEY_LENGTH);
-    SecByteBlock aesIV(AES_IV_LENGTH);
+    SecByteBlock aesIV(AES_IV_LENGTH); //gen keys
     generate_key_iv(aesKey, aesIV);
-
-    // Print key and IV
+    
     printHex("AES Key", aesKey);
     printHex("AES IV", aesIV);
 
-    // Define a pre-shared secret key and IV for encryption
     SecByteBlock preSharedKey(AES_KEY_LENGTH);
-    SecByteBlock preSharedIV(AES_IV_LENGTH);
+    SecByteBlock preSharedIV(AES_IV_LENGTH);     // define a pre-shared secret key and iv for encryption
     generate_key_iv(preSharedKey, preSharedIV);
-
-    // Print pre-shared key and IV
+    
     printHex("Pre-Shared Key", preSharedKey);
     printHex("Pre-Shared IV", preSharedIV);
 
-    // Encrypt the AES key and IV with the pre-shared secret
-    std::string encryptedData = encryptWithPreSharedKey(aesKey, aesIV, preSharedKey, preSharedIV);
+    std::string encryptedData = encryptWithPreSharedKey(aesKey, aesIV, preSharedKey, preSharedIV);     // encrypt the aes key and iv with the pre-shared secret
 
-    // Send the encrypted data to the server
-    // (In this example, we'll just simulate sending by printing the encrypted data)
+    // send the encrypted data to the server
     cout << "Encrypted Data Sent to Server: " << encryptedData << endl;
 
-    // Decrypt the received data from the server
     SecByteBlock receivedKey(AES_KEY_LENGTH);
     SecByteBlock receivedIV(AES_IV_LENGTH);
-    decryptWithPreSharedKey(encryptedData, receivedKey, receivedIV, preSharedKey, preSharedIV);
-
-    // Print the decrypted key and IV
+    decryptWithPreSharedKey(encryptedData, receivedKey, receivedIV, preSharedKey, preSharedIV); // decrypt the received data from the server
+    
     printHex("Received AES Key", receivedKey);
     printHex("Received AES IV", receivedIV);
-
-    // Here you can use the received key and IV to decrypt the message sent by the user to the server
-    // Decrypt the message using aes_decrypt function
 
     return 0;
 }
