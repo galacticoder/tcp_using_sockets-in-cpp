@@ -22,6 +22,8 @@
 #include <regex>
 #include <stdlib.h>
 
+//when importing rsa encryption find out how your gonna make it between multipe people
+
 //To run: g++ -o server server.cpp -lcryptopp -lfmt
 
 #define RED_TEXT "\033[31m" //red text color
