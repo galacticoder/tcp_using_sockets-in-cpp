@@ -62,6 +62,8 @@ thread receiver(receiveMessages, clientSocket, privateKey);
 std::string cipherText = rsaEncrypt(message, publicKey);
 
 
+//delete top
+
 //https://github.com/galacticoder
 #include <iostream>
 #include <cryptopp/pem.h>
